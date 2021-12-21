@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+<h1>Multiply</h1>
+{% if my_answer %}
+<div class="row justify-content-center">
+  <div class="alert alert-{{ color }} alert-dismissible fade show" role="alert">
+    {{ my_answer }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</div>
+{% endif %}
+
+<div class="row justify-content-center align-items-center">
+  <div class="col-2 p-0">
+    
+        <img src="static/images/{{ num_1 }}.png" class="img-fluid" alt="{{ num_1 }}">
+    
+  </div>
+  <div class="col-1 display-1 align-middle mr-3">
+  *
+  </div>
+  <div class="col-2 p-0">
+    
+        <img src="static/images/{{ num_2 }}.png" class="img-fluid" alt="{{ num_2 }}">
+    
+  </div>
+</div>
+
+
+<div class="row justify-content-center">
+    <form class="mt-4" action="{% url 'multiply' %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="answer" class="visually-hidden">Answer</label>
+            <input type="hidden" value="{{ num_1 }}" id="old_num_1" name="old_num_1">
+            <input type="hidden" value="{{ num_2 }}"  id="old_num_2" name="old_num_2">
+            <input type="text" required class="form-control" placeholder="Type Your Answer Here" id="answer" name="answer">
+        </div>
+        <button type="submit" class="btn btn-secondary">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+
